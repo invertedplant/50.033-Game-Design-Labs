@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
             marioBody.velocity = Vector2.zero;
         }
 
-        if (Input.GetButtonDown("Jump") && onGroundState)
+        if (Input.GetButton("Jump") && onGroundState)
         {
             marioBody.AddForce(Vector2.up * upSpeed, ForceMode2D.Impulse);
             onGroundState = false;
