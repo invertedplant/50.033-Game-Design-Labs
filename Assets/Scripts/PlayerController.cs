@@ -7,8 +7,9 @@ using System;
 public class PlayerController : MonoBehaviour
 {
     public float speed = 70;
-    public float upSpeed = 20;
+    public float upSpeed = 22;
     public float maxSpeed = 10;
+    public float maxAirSpeed = 12;
     public Transform enemyLocation;
     public TMP_Text scoreText;
     private int score = 0;
@@ -17,16 +18,6 @@ public class PlayerController : MonoBehaviour
     private bool onGroundState = true;
     private SpriteRenderer marioSprite;
     private bool faceRightState = true;
-
-    void OnCollisionEnter2D(Collision2D col)
-    {
-        if (col.gameObject.CompareTag("Ground"))
-        {
-            onGroundState = true; // back on ground
-            countScoreState = false; // reset score state
-            scoreText.text = "Score: " + score.ToString();
-        };
-    }
 
     // Even before you start, can be called many times
     void Awake()
@@ -44,12 +35,12 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Input.GetKeyUp("a") || Input.GetKeyUp("d"))
+        if (Input.GetButtonUp("Horizontal"))
         {
             marioBody.velocity = Vector2.zero;
         }
 
-        if (Input.GetKeyDown("space") && onGroundState)
+        if (Input.GetButtonDown("Jump") && onGroundState)
         {
             marioBody.AddForce(Vector2.up * upSpeed, ForceMode2D.Impulse);
             onGroundState = false;
@@ -61,7 +52,9 @@ public class PlayerController : MonoBehaviour
         if (Mathf.Abs(moveHorizontal) > 0)
         {
             Vector2 movement = new Vector2(moveHorizontal, 0);
-            if (marioBody.velocity.magnitude < maxSpeed)
+            if (marioBody.velocity.x < maxSpeed && onGroundState == true)
+                marioBody.AddForce(movement * speed);
+            else if (Mathf.Abs(marioBody.velocity.x) < maxAirSpeed && onGroundState == false)
                 marioBody.AddForce(movement * speed);
         }
 
@@ -71,13 +64,13 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         // toggle state
-        if (Input.GetKeyDown("a") && faceRightState)
+        if (Input.GetButtonDown("Horizontal") && Input.GetAxisRaw("Horizontal") < 0 && faceRightState)
         {
             faceRightState = false;
             marioSprite.flipX = true;
         }
 
-        if (Input.GetKeyDown("d") && !faceRightState)
+        if (Input.GetButtonDown("Horizontal") && Input.GetAxisRaw("Horizontal") > 0 && !faceRightState)
         {
             faceRightState = true;
             marioSprite.flipX = false;
@@ -103,5 +96,15 @@ public class PlayerController : MonoBehaviour
             // this.enabled = false;
             Time.timeScale = 0.0f;
         }
+    }
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.CompareTag("Ground"))
+        {
+            onGroundState = true; // back on ground
+            countScoreState = false; // reset score state
+            scoreText.text = "Score: " + score.ToString();
+        };
     }
 }
