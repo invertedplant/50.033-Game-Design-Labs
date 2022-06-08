@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - Enemy
   - Obstacle
+  - Background
   layers:
   - Default
   - TransparentFX
@@ -39,17 +40,20 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - BG
   m_SortingLayers:
+  - name: Background
+    uniqueID: 3260830909
+    locked: 0
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Player
-    uniqueID: 4002337345
     locked: 0
   - name: Enemy
     uniqueID: 1380465313
     locked: 0
   - name: Obstacle
     uniqueID: 1639310179
+    locked: 0
+  - name: Player
+    uniqueID: 4002337345
     locked: 0
