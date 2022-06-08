@@ -7,17 +7,20 @@ using System;
 public class PlayerController : MonoBehaviour
 {
     public float speed = 70;
-    public float upSpeed = 22;
+    public float upSpeed = 27;
     public float maxSpeed = 10;
-    public float maxAirSpeed = 12;
+    public float maxAirSpeed = 8;
     public Transform enemyLocation;
-    public TMP_Text scoreText;
+    /* public TMP_Text scoreText;
     private int score = 0;
-    private bool countScoreState = false;
+    private bool countScoreState = false; removed for week 2*/
     private Rigidbody2D marioBody;
     private bool onGroundState = true;
     private SpriteRenderer marioSprite;
     private bool faceRightState = true;
+    // week 2 starts here
+    private Animator marioAnimator;
+    private AudioSource marioAudio;
 
     // Even before you start, can be called many times
     void Awake()
@@ -31,6 +34,8 @@ public class PlayerController : MonoBehaviour
         Application.targetFrameRate = 30;
         marioBody = GetComponent<Rigidbody2D>();
         marioSprite = GetComponent<SpriteRenderer>();
+        marioAnimator = GetComponent<Animator>();
+        marioAudio = GetComponent<AudioSource>();
     }
 
     void FixedUpdate()
@@ -44,7 +49,7 @@ public class PlayerController : MonoBehaviour
         {
             marioBody.AddForce(Vector2.up * upSpeed, ForceMode2D.Impulse);
             onGroundState = false;
-            countScoreState = true; //check if Gomba is underneath
+            /* countScoreState = true; //check if Gomba is underneath, removed for week 2 */
         }
 
         // dynamic rigidbody
@@ -64,47 +69,66 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         // toggle state
-        if (Input.GetButtonDown("Horizontal") && Input.GetAxisRaw("Horizontal") < 0 && faceRightState)
+        if (Input.GetButton("Horizontal") && Input.GetAxisRaw("Horizontal") < 0 && faceRightState)
         {
             faceRightState = false;
             marioSprite.flipX = true;
+            if (Mathf.Abs(marioBody.velocity.x) > 0.5)
+                marioAnimator.SetTrigger("onSkid");
         }
 
-        if (Input.GetButtonDown("Horizontal") && Input.GetAxisRaw("Horizontal") > 0 && !faceRightState)
+        if (Input.GetButton("Horizontal") && Input.GetAxisRaw("Horizontal") > 0 && !faceRightState)
         {
             faceRightState = true;
             marioSprite.flipX = false;
+            if (Mathf.Abs(marioBody.velocity.x) > 0.5)
+                marioAnimator.SetTrigger("onSkid");
         }
         // when jumping, and Gomba is near Mario and we haven't registered our score
-        if (!onGroundState && countScoreState)
-        {
-            if (Mathf.Abs(transform.position.x - enemyLocation.position.x) < 0.5f)
-            {
-                countScoreState = false;
-                score++;
-                Debug.Log(score);
-            }
-        }
+        /*         if (!onGroundState && countScoreState) removed for week 2
+                {
+                    if (Mathf.Abs(transform.position.x - enemyLocation.position.x) < 0.5f)
+                    {
+                        countScoreState = false;
+                        score++;
+                        Debug.Log(score);
+                    }
+                } */
+        marioAnimator.SetFloat("xSpeed", Mathf.Abs(marioBody.velocity.x));
+        marioAnimator.SetBool("onGround", onGroundState);
+
     }
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("Enemy"))
+    /*     void OnTriggerEnter2D(Collider2D other) removed for week 2
         {
-            Debug.Log("Collided with Gomba!");
-            marioBody.velocity = Vector2.zero;
-            // this.enabled = false;
-            Time.timeScale = 0.0f;
-        }
-    }
+            if (other.gameObject.CompareTag("Enemy"))
+            {
+                Debug.Log("Collided with Gomba!");
+                marioBody.velocity = Vector2.zero;
+                // this.enabled = false;
+                Time.timeScale = 0.0f;
+            }
+        } */
 
     void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.CompareTag("Ground"))
         {
             onGroundState = true; // back on ground
-            countScoreState = false; // reset score state
-            scoreText.text = "Score: " + score.ToString();
+            /*             countScoreState = false; // reset score state
+                        scoreText.text = "Score: " + score.ToString(); removed for week 2 */
         };
+
+        if (col.gameObject.CompareTag("Obstacle") && Mathf.Abs(marioBody.velocity.y) < 0.01f)
+        {
+            onGroundState = true; // back on ground
+            /*             countScoreState = false; // reset score state
+                        scoreText.text = "Score: " + score.ToString(); removed for week 2 */
+        }
+    }
+
+    void PlayJumpSound()
+    {
+        marioAudio.PlayOneShot(marioAudio.clip);
     }
 }

@@ -6,17 +6,18 @@ TagManager:
   tags:
   - Ground
   - Enemy
+  - Obstacle
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - Obstacle
+  - QuestionBox
+  - Spawned
+  - Enemy
   - 
   - 
   - 
@@ -48,4 +49,7 @@ TagManager:
     locked: 0
   - name: Enemy
     uniqueID: 1380465313
+    locked: 0
+  - name: Obstacle
+    uniqueID: 1639310179
     locked: 0
