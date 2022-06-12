@@ -7,7 +7,7 @@ using System;
 public class PlayerController : MonoBehaviour
 {
     public float speed = 70;
-    public float upSpeed = 27;
+    public float upSpeed = 40;
     public float maxSpeed = 10;
     public float maxAirSpeed = 8;
     public Transform enemyLocation;

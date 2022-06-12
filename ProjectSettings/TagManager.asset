@@ -19,6 +19,17 @@ TagManager:
   - QuestionBox
   - Spawned
   - Enemy
+  - BG1
+  - BG2
+  - BG3
+  - BG4
+  - BG5
+  - BG6
+  - BG7
+  - BG8
+  - BG9
+  - BG10
+  - Debris
   - 
   - 
   - 
@@ -29,18 +40,7 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - BG
+  - BGS
   m_SortingLayers:
   - name: Background
     uniqueID: 3260830909
