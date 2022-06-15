@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1451513960623232665}
   - component: {fileID: 4399508543988285186}
   m_Layer: 6
-  m_Name: Red_Mushroom
+  m_Name: Red_Mushroom_Glowing
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

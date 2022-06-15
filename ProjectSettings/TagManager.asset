@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - Obstacle
   - Background
+  - UI
+  - Consumable
   layers:
   - Default
   - TransparentFX
@@ -56,4 +58,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 4002337345
+    locked: 0
+  - name: UI
+    uniqueID: 2331273437
     locked: 0

@@ -90,7 +90,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4689400052647993112}
   m_Layer: 6
-  m_Name: HittableSimple
+  m_Name: HittableSimple1
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -190,7 +190,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300048, guid: 855dc7396df3c4e49ac4d21234eac5e1, type: 3}
+  m_Sprite: {fileID: 21300052, guid: 855dc7396df3c4e49ac4d21234eac5e1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -279,6 +279,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidBody: {fileID: 4689400052963780419}
   springJoint: {fileID: 4689400052963780420}
-  consumablePrefab: {fileID: 4242985609931112874, guid: a5f4652eb5783d7459a5be451593ea17, type: 3}
+  consumablePrefab: {fileID: 5036556945993832174, guid: 9b74a8edfacefc041a6e5e326fa931e5, type: 3}
   spriteRenderer: {fileID: 4689400052963780417}
   usedQuestionBox: {fileID: 21300054, guid: 855dc7396df3c4e49ac4d21234eac5e1, type: 3}
+  gameConstants: {fileID: 11400000, guid: 4c059f076bd4a9a46aa9c347a981a80e, type: 2}

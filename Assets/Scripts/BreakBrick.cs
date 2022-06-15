@@ -26,6 +26,7 @@ public class BreakBrick : MonoBehaviour
 		gameObject.transform.parent.GetComponent<BoxCollider2D>().enabled  =  false;
         GetComponent<AudioSource>().Play();
 		GetComponent<EdgeCollider2D>().enabled  =  false;
+        CentralManager.centralManagerInstance.increaseScore();
 	}
 }
 }

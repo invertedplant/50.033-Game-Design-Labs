@@ -10,6 +10,7 @@ public class QuestionBoxController : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public Sprite usedQuestionBox; // the sprite that indicates empty box instead of a question mark
     private bool hit = false;
+    public GameConstants gameConstants;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +29,7 @@ public class QuestionBoxController : MonoBehaviour
         {
             hit = true;
             // ensure that we move this object sufficiently 
-            rigidBody.AddForce(new Vector2(0, rigidBody.mass * 20), ForceMode2D.Impulse);
+            rigidBody.AddForce(new Vector2(0, rigidBody.mass * gameConstants.springMultiplier), ForceMode2D.Impulse);
             // spawn mushroom
             Instantiate(consumablePrefab, new Vector3(this.transform.position.x, this.transform.position.y + 1.0f, this.transform.position.z), Quaternion.identity);
             // begin check to disable object's spring and rigidbody

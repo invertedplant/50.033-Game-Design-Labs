@@ -34,16 +34,16 @@ public class MenuController : MonoBehaviour
     {
         foreach (Transform eachChild in transform)
         {
-            if (eachChild.name != "Score")
+            if (eachChild.name == "Panel" || eachChild.name == "Start")
             {
-                Debug.Log("Child found. Name: " + eachChild.name);
+                Debug.Log("Child found. Disabling: " + eachChild.name);
                 // disable them
                 eachChild.gameObject.SetActive(false);
                 Time.timeScale = 1.0f;
             }
             if (eachChild.name == "Restart")
             {
-                Debug.Log("Child found. Name: " + eachChild.name);
+                Debug.Log("Child found. Enabling: " + eachChild.name);
                 // disable them
                 eachChild.gameObject.SetActive(true);
             }

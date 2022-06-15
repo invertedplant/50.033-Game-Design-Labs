@@ -6,21 +6,23 @@ using System;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 70;
-    public float upSpeed = 40;
-    public float maxSpeed = 10;
-    public float maxAirSpeed = 8;
+    public GameConstants gameConstants;
     public Transform enemyLocation;
     /* public TMP_Text scoreText;
     private int score = 0;
     private bool countScoreState = false; removed for week 2*/
     private Rigidbody2D marioBody;
     private bool onGroundState = true;
+    private BoxCollider2D marioCollider;
     private SpriteRenderer marioSprite;
     private bool faceRightState = true;
     // week 2 starts here
     private Animator marioAnimator;
-    private AudioSource marioAudio;
+    // private AudioSource marioAudio;
+    private bool marioDead = false;
+    public AudioSource[] marioAudio;
+    public AudioSource jumpClip;
+    public AudioSource deathClip;
 
     // Even before you start, can be called many times
     void Awake()
@@ -31,15 +33,20 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         // Set to be 30 FPS
-        Application.targetFrameRate = 30;
+        Application.targetFrameRate = gameConstants.targetFrameRate;
         marioBody = GetComponent<Rigidbody2D>();
         marioSprite = GetComponent<SpriteRenderer>();
         marioAnimator = GetComponent<Animator>();
-        marioAudio = GetComponent<AudioSource>();
+        marioAudio = GetComponents<AudioSource>();
+        jumpClip = marioAudio[0];
+        deathClip = marioAudio[1];
+        marioCollider = GetComponent<BoxCollider2D>();
+        GameManager.OnPlayerDeath += PlayerDiesSequence;
     }
 
     void FixedUpdate()
     {
+        if (marioDead) return;
         if (Input.GetButtonUp("Horizontal"))
         {
             marioBody.velocity = Vector2.zero;
@@ -47,7 +54,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButton("Jump") && onGroundState)
         {
-            marioBody.AddForce(Vector2.up * upSpeed, ForceMode2D.Impulse);
+            marioBody.AddForce(Vector2.up * gameConstants.upSpeed, ForceMode2D.Impulse);
             onGroundState = false;
             /* countScoreState = true; //check if Gomba is underneath, removed for week 2 */
         }
@@ -57,10 +64,10 @@ public class PlayerController : MonoBehaviour
         if (Mathf.Abs(moveHorizontal) > 0)
         {
             Vector2 movement = new Vector2(moveHorizontal, 0);
-            if (marioBody.velocity.x < maxSpeed && onGroundState == true)
-                marioBody.AddForce(movement * speed);
-            else if (Mathf.Abs(marioBody.velocity.x) < maxAirSpeed && onGroundState == false)
-                marioBody.AddForce(movement * speed);
+            if (marioBody.velocity.x < gameConstants.maxSpeed && onGroundState == true)
+                marioBody.AddForce(movement * gameConstants.speed);
+            else if (Mathf.Abs(marioBody.velocity.x) < gameConstants.maxAirSpeed && onGroundState == false)
+                marioBody.AddForce(movement * gameConstants.speed);
         }
 
     }
@@ -68,12 +75,13 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (marioDead) return;
         // toggle state
         if (Input.GetButton("Horizontal") && Input.GetAxisRaw("Horizontal") < 0 && faceRightState)
         {
             faceRightState = false;
             marioSprite.flipX = true;
-            if (Mathf.Abs(marioBody.velocity.x) > 0.5)
+            if (Mathf.Abs(marioBody.velocity.x) > gameConstants.skidLimit)
                 marioAnimator.SetTrigger("onSkid");
         }
 
@@ -81,7 +89,7 @@ public class PlayerController : MonoBehaviour
         {
             faceRightState = true;
             marioSprite.flipX = false;
-            if (Mathf.Abs(marioBody.velocity.x) > 0.5)
+            if (Mathf.Abs(marioBody.velocity.x) > gameConstants.skidLimit)
                 marioAnimator.SetTrigger("onSkid");
         }
         // when jumping, and Gomba is near Mario and we haven't registered our score
@@ -94,6 +102,15 @@ public class PlayerController : MonoBehaviour
                         Debug.Log(score);
                     }
                 } */
+        if (Input.GetKeyDown("z"))
+        {
+            CentralManager.centralManagerInstance.consumePowerup(KeyCode.Z, this.gameObject);
+        }
+
+        if (Input.GetKeyDown("x"))
+        {
+            CentralManager.centralManagerInstance.consumePowerup(KeyCode.X, this.gameObject);
+        }
         marioAnimator.SetFloat("xSpeed", Mathf.Abs(marioBody.velocity.x));
         marioAnimator.SetBool("onGround", onGroundState);
 
@@ -129,6 +146,27 @@ public class PlayerController : MonoBehaviour
 
     void PlayJumpSound()
     {
-        marioAudio.PlayOneShot(marioAudio.clip);
+        jumpClip.PlayOneShot(jumpClip.clip);
+    }
+
+    void PlayDeathSound()
+    {
+        deathClip.PlayOneShot(deathClip.clip);
+    }
+
+    void PlayerDiesSequence()
+    {
+        // Mario dies
+        marioDead = true;
+        PlayDeathSound();
+        marioCollider.enabled = false;
+        marioAnimator.SetTrigger("unAlive");
+        marioBody.velocity = Vector2.zero;
+        marioBody.AddForce(gameConstants.deathForce, ForceMode2D.Impulse);
+    }
+
+    void OnDestroy()
+    {
+        GameManager.OnPlayerDeath -= PlayerDiesSequence;
     }
 }

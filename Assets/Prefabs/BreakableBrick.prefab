@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debrisPrefab: {fileID: 6414836959860825004, guid: 55386ae7997a91045b7f7d5ce9a61bd6, type: 3}
+  gameConstants: {fileID: 11400000, guid: 4c059f076bd4a9a46aa9c347a981a80e, type: 2}
 --- !u!1 &4159596114682725322
 GameObject:
   m_ObjectHideFlags: 0
@@ -238,7 +239,7 @@ AudioSource:
   m_GameObject: {fileID: 4159596115216800014}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -6637801407416301226, guid: dd08de1cf149b2d40b9a8790b703cf52, type: 2}
   m_audioClip: {fileID: 8300000, guid: 490f1cae6c7ad487db9edf3915018d85, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
