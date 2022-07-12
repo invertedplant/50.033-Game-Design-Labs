@@ -20,6 +20,7 @@ MonoBehaviour:
   spawnNumberOfDebris: 10
   rotatorRotateSpeed: 6
   testValue: 0
+  godMode: 0
   enemySpeed: 1.5
   enemySpeedOffset: 0.75
   killHeight: 0.75
@@ -29,6 +30,7 @@ MonoBehaviour:
   upSpeed: 40
   maxSpeed: 12
   maxAirSpeed: 8
+  AirSpeedOffset: -4
   skidLimit: 0.3
   deathForce: {x: 0, y: 20}
   mushroomSpeed: 3.5
@@ -40,3 +42,6 @@ MonoBehaviour:
   orangeMushroomMultiplier: 2
   redMushroomBoost: 15
   springMultiplier: 20
+  playerMaxSpeed: 12
+  playerMaxJumpSpeed: 40
+  playerDefaultForce: 120

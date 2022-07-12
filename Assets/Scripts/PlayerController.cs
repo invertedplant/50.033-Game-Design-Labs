@@ -10,7 +10,8 @@ public class PlayerController : MonoBehaviour
     public Transform enemyLocation;
     /* public TMP_Text scoreText;
     private int score = 0;
-    private bool countScoreState = false; removed for week 2*/
+    */
+    // private bool countScoreState = false;
     private Rigidbody2D marioBody;
     private bool onGroundState = true;
     private BoxCollider2D marioCollider;
@@ -33,6 +34,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         // Set to be 30 FPS
+        Time.timeScale = 1.0f;
         Application.targetFrameRate = gameConstants.targetFrameRate;
         marioBody = GetComponent<Rigidbody2D>();
         marioSprite = GetComponent<SpriteRenderer>();

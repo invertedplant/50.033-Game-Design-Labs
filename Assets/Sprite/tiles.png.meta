@@ -1880,7 +1880,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 16
@@ -1911,21 +1911,9 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
   - serializedVersion: 3
     buildTarget: Standalone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -14719,12 +14707,11 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       tiles_464: 21300928
-      tiles_482: 21300964
+      tiles_553: 21301106
       tiles_74: 21300148
       tiles_442: 21300884
+      tiles_529: 21301058
       tiles_112: 21300224
-      tiles_140: 21300280
-      tiles_108: 21300216
       castle_doortop: 21300080
       tiles_212: 21300424
       tiles_67: 21300134
@@ -14740,6 +14727,7 @@ TextureImporter:
       tiles_76: 21300152
       tiles_216: 21300432
       tiles_582: 21301164
+      tiles_518: 21301036
       tiles_438: 21300876
       tiles_6: 21300012
       tiles_91: 21300182
@@ -14794,13 +14782,13 @@ TextureImporter:
       background_cloud_bottom_left: 21301090
       tiles_370: 21300740
       tiles_205: 21300410
-      tiles_346: 21300692
       tiles_23: 21300046
+      tiles_96: 21300192
       tiles_86: 21300172
       tiles_326: 21300652
       tiles_383: 21300766
       tiles_141: 21300282
-      tiles_96: 21300192
+      tiles_346: 21300692
       tiles_387: 21300774
       object_pipe_middle: 21301222
       tiles_295: 21300590
@@ -14868,13 +14856,13 @@ TextureImporter:
       tiles_344: 21300688
       tiles_506: 21301012
       tiles_165: 21300330
+      tiles_97: 21300194
       tiles_431: 21300862
       tiles_170: 21300340
       tiles_426: 21300852
-      tiles_97: 21300194
       tiles_559: 21301118
-      tiles_390: 21300780
       tiles_331: 21300662
+      tiles_390: 21300780
       tiles_99: 21300198
       tiles_236: 21300472
       tiles_321: 21300642
@@ -14885,13 +14873,13 @@ TextureImporter:
       tiles_590: 21301180
       tiles_362: 21300724
       tiles_19: 21300038
-      tiles_413: 21300826
-      tiles_363: 21300726
       tiles_128: 21300256
-      tiles_462: 21300924
+      tiles_363: 21300726
+      tiles_413: 21300826
       tiles_199: 21300398
       tiles_178: 21300356
       coin_1: 21300104
+      tiles_462: 21300924
       tiles_148: 21300296
       tiles_98: 21300196
       tiles_357: 21300714
@@ -15020,9 +15008,9 @@ TextureImporter:
       tiles_175: 21300350
       tiles_223: 21300446
       tiles_274: 21300548
+      tiles_145: 21300290
       tiles_30: 21300060
       tiles_530: 21301060
-      tiles_145: 21300290
       tiles_66: 21300132
       tiles_33: 21300066
       tiles_94: 21300188
@@ -15043,17 +15031,17 @@ TextureImporter:
       tiles_93: 21300186
       tiles_48: 21300096
       tiles_101: 21300202
-      tiles_593: 21301186
       tiles_225: 21300450
+      tiles_593: 21301186
       tiles_213: 21300426
+      tiles_302: 21300604
       tiles_228: 21300456
-      tiles_486: 21300972
+      tiles_359: 21300718
       tiles_378: 21300756
       tiles_510: 21301020
       tiles_290: 21300580
-      tiles_302: 21300604
+      tiles_486: 21300972
       tiles_82: 21300164
-      tiles_359: 21300718
       tiles_568: 21301136
       tiles_83: 21300166
       background_hill_down: 21300500
@@ -15313,17 +15301,17 @@ TextureImporter:
       tiles_365: 21300730
       tiles_385: 21300770
       tiles_15: 21300030
-      tiles_553: 21301106
       tiles_126: 21300252
-      tiles_490: 21300980
-      tiles_478: 21300956
-      tiles_529: 21301058
-      tiles_518: 21301036
-      tiles_37: 21300074
       tiles_111: 21300222
       tiles_58: 21300116
-      tiles_103: 21300206
+      tiles_37: 21300074
       tiles_10: 21300020
+      tiles_103: 21300206
+      tiles_140: 21300280
+      tiles_108: 21300216
+      tiles_490: 21300980
+      tiles_478: 21300956
+      tiles_482: 21300964
       tiles_495: 21300990
       tiles_310: 21300620
   spritePackingTag: 
